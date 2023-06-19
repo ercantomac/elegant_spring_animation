@@ -57,6 +57,6 @@ You can provide a value between -1 and 1. Higher the value, bouncier the animati
 _elegantCurve = ElegantSpring(duration: _duration, bounce: 0.25);
 ```
 
-<img src="https://github.com/ercantomac/elegant_spring_animation/blob/main/assets/elegant_spring_animation_bounce_0.gif" width="427" height="444"/>
-<img src="https://github.com/ercantomac/elegant_spring_animation/blob/main/assets/elegant_spring_animation_bounce_2_point_5.gif" width="427" height="444"/>
-<img src="https://github.com/ercantomac/elegant_spring_animation/blob/main/assets/elegant_spring_animation_bounce_4.gif" width="427" height="444"/>
+<img src="https://raw.githubusercontent.com/ercantomac/elegant_spring_animation/main/assets/elegant_spring_animation_bounce_0.gif" width="427" height="444"/>
+<img src="https://raw.githubusercontent.com/ercantomac/elegant_spring_animation/main/assets/elegant_spring_animation_bounce_2_point_5.gif" width="427" height="444"/>
+<img src="https://raw.githubusercontent.com/ercantomac/elegant_spring_animation/main/assets/elegant_spring_animation_bounce_4.gif" width="427" height="444"/>
