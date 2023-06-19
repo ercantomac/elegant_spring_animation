@@ -63,6 +63,10 @@ You can provide a value between -1 and 1. Higher the value, bouncier the animati
 _elegantCurve = ElegantSpring(duration: _duration, bounce: 0.25);
 ```
 
+![](https://github.com/ercantomac/elegant_spring_animation/blob/main/assets/elegant_spring_animation_bounce_0.gif)
+![](https://github.com/ercantomac/elegant_spring_animation/blob/main/assets/elegant_spring_animation_bounce_2_point_5.gif)
+![](https://github.com/ercantomac/elegant_spring_animation/blob/main/assets/elegant_spring_animation_bounce_4.gif)
+
 <!--
 ## Additional information
 
