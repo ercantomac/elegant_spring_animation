@@ -17,12 +17,6 @@ This package lets you easily create spring physics-based animation curves, and u
 
 [See live demo here.](https://elegant-spring-animation.netlify.app/)
 
-<!--
-## Features
-
-TODO: List what your package can do. Maybe include images, gifs, or videos.
--->
-
 ## Getting started
 
 Add `elegant_spring_animation` as a dependency in your pubspec.yaml file:
@@ -66,11 +60,3 @@ _elegantCurve = ElegantSpring(duration: _duration, bounce: 0.25);
 <img src="https://github.com/ercantomac/elegant_spring_animation/blob/main/assets/elegant_spring_animation_bounce_0.gif" width="427" height="444"/>
 <img src="https://github.com/ercantomac/elegant_spring_animation/blob/main/assets/elegant_spring_animation_bounce_2_point_5.gif" width="427" height="444"/>
 <img src="https://github.com/ercantomac/elegant_spring_animation/blob/main/assets/elegant_spring_animation_bounce_4.gif" width="427" height="444"/>
-
-<!--
-## Additional information
-
-TODO: Tell users more about the package: where to find more information, how to
-contribute to the package, how to file issues, what response they can expect
-from the package authors, and more.
--->
