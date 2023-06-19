@@ -36,12 +36,12 @@ class ElegantSpring extends Curve {
 
     _val = (1 - _sim.x(1.0));
 
-    print('Bounce: $bounce');
+    /*print('Bounce: $bounce');
     print('Duration: $dur seconds');
     print('Stiffness: $stiffness');
     print('Damping ratio: $dampingRatio');
     //print('Alternative damping ratio: $alternativeDampingRatio');
-    print('Damping: ${desc.damping}\n\n');
+    print('Damping: ${desc.damping}\n\n');*/
   }
 
   late final SpringSimulation _sim;
