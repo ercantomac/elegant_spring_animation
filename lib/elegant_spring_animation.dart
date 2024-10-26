@@ -23,12 +23,6 @@ class ElegantSpring extends Curve {
     final double denominator = 2 * sqrt(_mass * _stiffness);
 
     recommendedDuration = Duration(milliseconds: ((-log(_tolerance) / ((numerator / denominator) * naturalFrequency)) * 1000).round());
-
-    print('_dampingRatio: $_dampingRatio');
-    print('_stiffness: $_stiffness');
-    print('_dampingCoefficient: $_dampingCoefficient');
-    print('_angularFrequency: $_angularFrequency');
-    print('recommendedDuration: $recommendedDuration');
   }
 
   /// 4 * (pi^2)
