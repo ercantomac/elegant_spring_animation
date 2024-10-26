@@ -1,7 +1,12 @@
+import 'dart:math';
+
 import 'package:elegant_spring_animation/elegant_spring_animation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
   runApp(const MyApp());
 }
 
@@ -35,16 +40,10 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateMixin {
-  late double _kBounce = 0.25;
-  late int _kDuration = 1000;
-  late AnimationController _animationController;
-  late Curve _elegantCurve = ElegantSpring(duration: Duration(milliseconds: _kDuration), bounce: _kBounce);
-
-  @override
-  void initState() {
-    super.initState();
-    _animationController = AnimationController(vsync: this, duration: Duration(milliseconds: _kDuration));
-  }
+  late double _kBounce = 0.0;
+  late int _kDuration = _elegantCurve.recommendedDuration.inMilliseconds;
+  late final AnimationController _animationController = AnimationController(vsync: this, duration: Duration(milliseconds: _kDuration));
+  late ElegantSpring _elegantCurve = ElegantSpring(bounce: _kBounce);
 
   @override
   void dispose() {
@@ -54,70 +53,82 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
 
   @override
   Widget build(BuildContext context) {
+    final double maxWidth = max(MediaQuery.sizeOf(context).height / 2, MediaQuery.sizeOf(context).width / 2);
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: const Text('Elegant Spring Animation Demo'),
         centerTitle: true,
       ),
-      body: Row(
-        children: <Expanded>[
-          Expanded(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Text(
-                  'Duration: $_kDuration ms',
-                  style: Theme.of(context).textTheme.headlineSmall,
+      body: FractionallySizedBox(
+        widthFactor: 1.0,
+        child: Wrap(
+          //crossAxisAlignment: WrapCrossAlignment.center,
+          runAlignment: WrapAlignment.center,
+          alignment: WrapAlignment.center,
+          children: <Widget>[
+            SizedBox(
+              width: maxWidth,
+              child: AspectRatio(
+                aspectRatio: 1,
+                child: FractionallySizedBox(
+                  //widthFactor: 0.7,
+                  heightFactor: 0.7,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      Text(
+                        'Duration: $_kDuration ms',
+                        style: Theme.of(context).textTheme.headlineSmall,
+                      ),
+                      Slider(
+                        divisions: 98,
+                        min: 100.0,
+                        max: 10000.0,
+                        value: _kDuration.toDouble(),
+                        onChanged: (double val) {
+                          setState(() {
+                            _kDuration = val.toInt();
+                          });
+                        },
+                      ),
+                      Text(
+                        'Bounce: $_kBounce',
+                        style: Theme.of(context).textTheme.headlineSmall,
+                      ),
+                      Slider(
+                        divisions: 20,
+                        min: 0.0,
+                        max: 1.0,
+                        value: _kBounce,
+                        onChanged: (double val) {
+                          setState(() {
+                            _kBounce = double.parse(val.toStringAsFixed(2));
+                            _kDuration = ElegantSpring(bounce: _kBounce).recommendedDuration.inMilliseconds;
+                          });
+                        },
+                      ),
+                    ],
+                  ),
                 ),
-                Slider(
-                  divisions: 100,
-                  min: 100.0,
-                  max: 5100.0,
-                  value: _kDuration.toDouble(),
-                  onChanged: (double val) {
-                    setState(() {
-                      _kDuration = val.toInt();
-                      _animationController.duration = Duration(milliseconds: _kDuration);
-                      _elegantCurve = ElegantSpring(duration: Duration(milliseconds: _kDuration), bounce: _kBounce);
-                    });
-                  },
-                ),
-                const SizedBox(height: 50.0),
-                Text(
-                  'Bounce: $_kBounce',
-                  style: Theme.of(context).textTheme.headlineSmall,
-                ),
-                Slider(
-                  divisions: 40,
-                  min: -1.0,
-                  max: 1.0,
-                  value: _kBounce,
-                  onChanged: (double val) {
-                    setState(() {
-                      _kBounce = double.parse(val.toStringAsFixed(2));
-                      _elegantCurve = ElegantSpring(duration: Duration(milliseconds: _kDuration), bounce: _kBounce);
-                    });
-                  },
-                ),
-              ],
+              ),
             ),
-          ),
-          Expanded(
-            child: Row(
-              children: <Widget>[
-                const Spacer(flex: 2),
-                Expanded(
-                  flex: 3,
-                  child: AspectRatio(
-                    aspectRatio: 1,
+            SizedBox(
+              width: maxWidth,
+              child: AspectRatio(
+                aspectRatio: 1,
+                child: Align(
+                  alignment: const Alignment(0.0, -0.5),
+                  child: FractionallySizedBox(
+                    widthFactor: 0.5,
+                    heightFactor: 0.5,
                     child: ScaleTransition(
-                      scale: CurvedAnimation(
-                              parent: _animationController, curve: _elegantCurve, reverseCurve: _elegantCurve.flipped)
+                      scale: CurvedAnimation(parent: _animationController, curve: _elegantCurve, reverseCurve: _elegantCurve.flipped)
                           .drive(Tween<double>(begin: 1.0, end: 0.2)),
                       child: RotationTransition(
-                        turns: CurvedAnimation(
-                                parent: _animationController, curve: _elegantCurve, reverseCurve: _elegantCurve.flipped)
+                        turns: CurvedAnimation(parent: _animationController, curve: _elegantCurve, reverseCurve: _elegantCurve.flipped)
                             .drive(Tween<double>(begin: 0.0, end: 0.5)),
                         child: Material(
                           elevation: 16.0,
@@ -128,24 +139,39 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
                     ),
                   ),
                 ),
-                const Spacer(flex: 2),
-              ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {
-          if (_animationController.isDismissed) {
-            _animationController.forward();
-          } else {
-            _animationController.reverse();
-          }
-        },
+        onPressed: _isAnimating
+            ? null
+            : () async {
+                setState(() {
+                  _animationController.duration = Duration(milliseconds: _kDuration);
+                  _elegantCurve = ElegantSpring(bounce: _kBounce);
+                  _isAnimating = true;
+                });
+
+                if (_animationController.isDismissed) {
+                  await _animationController.forward();
+                } else {
+                  await _animationController.reverse();
+                }
+
+                setState(() {
+                  _isAnimating = false;
+                });
+              },
+        backgroundColor: _isAnimating ? Theme.of(context).colorScheme.secondaryContainer : null,
+        foregroundColor: _isAnimating ? Colors.white38 : null,
         label: const Text('Run'),
         icon: const Icon(Icons.play_circle_outline_rounded),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
+
+  late bool _isAnimating = false;
 }

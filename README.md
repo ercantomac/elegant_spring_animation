@@ -22,41 +22,49 @@ This package lets you easily create spring physics-based animation curves, and u
 Add `elegant_spring_animation` as a dependency in your pubspec.yaml file:
 ```yaml
 dependencies:
-  elegant_spring_animation: ^1.0.0
+  elegant_spring_animation: ^2.0.0
 ```
 
 ## Usage
 
 ### Basic usage
 
-Pass the duration of your animation in the constructor, and that's it.
-
-Note: be sure to pass the correct duration, as internal calculations are based on the duration.
-(If you pass a different duration than the actual duration of the animation, the resulting curve won't be ideal)
-
 ```dart
-  final Duration _duration = const Duration(milliseconds: 1000);
-  late AnimationController _animationController;
-  late Curve _elegantCurve;
+late AnimationController animationController;
+final ElegantSpring curve = ElegantSpring.smooth;
 
-  @override
-  void initState() {
-    super.initState();
-    _animationController = AnimationController(vsync: this, duration: _duration);
-    _elegantCurve = ElegantSpring(duration: _duration);
-  }
+@override
+void initState() {
+  super.initState();
+  animationController = AnimationController(vsync: this, duration: curve.recommendedDuration);
+}
 ```
 
 ### Customizing the bounciness
 
 There is an optional `bounce` parameter, which has a default value of 0 (no bounce).
 
-You can provide a value between -1 and 1. Higher the value, bouncier the animation. (Negative values may result in an unnatural motion).
+You can provide a value between 0 and 1. Higher the value, bouncier the animation.
 
 ```dart
-_elegantCurve = ElegantSpring(duration: _duration, bounce: 0.25);
+final ElegantSpring curve = ElegantSpring(bounce: 0.25);
 ```
 
-<img src="https://raw.githubusercontent.com/ercantomac/elegant_spring_animation/main/assets/elegant_spring_animation_bounce_0.gif" width="427" height="444"/>
-<img src="https://raw.githubusercontent.com/ercantomac/elegant_spring_animation/main/assets/elegant_spring_animation_bounce_2_point_5.gif" width="427" height="444"/>
-<img src="https://raw.githubusercontent.com/ercantomac/elegant_spring_animation/main/assets/elegant_spring_animation_bounce_4.gif" width="427" height="444"/>
+### Predefined curves
+There are five predefined curves:
+
+- ``ElegantSpring.smooth``: Has no bounce, gracefully comes to rest.
+
+- ``ElegantSpring.gentleBounce``: Has a very subtle bounce.
+
+- ``ElegantSpring.mediumBounce``: Has a noticeable bounce, but not too distracting.
+
+- ``ElegantSpring.strongBounce``: Has a strong bounce.
+
+- ``ElegantSpring.maximumBounce``: Has the maximum bounce, ideal for playful UIs and games.
+
+### ``recommendedDuration`` property
+You can use whatever duration you want for your animation. After all, ``ElegantSpring`` is just a ``Curve``.
+
+However, if you don't want your animation to feel too fast or too slow, it is recommended to use the ``recommendedDuration``.
+It is calculated based on the ``bounce`` parameter, and it's approximately equal to the time it takes the spring to "settle" at the final point.
