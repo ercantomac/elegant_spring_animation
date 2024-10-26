@@ -13,7 +13,7 @@ and the Flutter guide for
 
 Make your animations feel natural with spring animations.
 
-This package lets you easily create spring physics-based animation curves, and use them wherever you want.
+This package lets you easily create animation curves that are based on spring physics, and use them wherever you want.
 
 [See live demo here.](https://elegant-spring-animation.netlify.app/)
 
