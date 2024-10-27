@@ -54,17 +54,25 @@ final ElegantSpring curve = ElegantSpring(bounce: 0.25);
 There are five predefined curves:
 
 - ``ElegantSpring.smooth``: Has no bounce, gracefully comes to rest.
+  <img src="https://github.com/ercantomac/elegant_spring_animation/blob/main/assets/bounce_0.png" height="480" title="0 Bounce"/>
 
 - ``ElegantSpring.gentleBounce``: Has a very subtle bounce.
+  <img src="https://github.com/ercantomac/elegant_spring_animation/blob/main/assets/bounce_0-25.png" height="480" title="0.25 Bounce"/>
 
 - ``ElegantSpring.mediumBounce``: Has a noticeable bounce, but not too distracting.
+  <img src="https://github.com/ercantomac/elegant_spring_animation/blob/main/assets/bounce_0-5.png" height="480" title="0.5 Bounce"/>
 
 - ``ElegantSpring.strongBounce``: Has a strong bounce.
+  <img src="https://github.com/ercantomac/elegant_spring_animation/blob/main/assets/bounce_0-75.png" height="480" title="0.75 Bounce"/>
 
 - ``ElegantSpring.maximumBounce``: Has the maximum bounce, ideal for playful UIs and games.
+  <img src="https://github.com/ercantomac/elegant_spring_animation/blob/main/assets/bounce_1.png" height="480" title="1 Bounce"/>
 
 ### ``recommendedDuration`` property
 You can use whatever duration you want for your animation. After all, ``ElegantSpring`` is just a ``Curve``.
 
 However, if you don't want your animation to feel too fast or too slow, it is recommended to use the ``recommendedDuration``.
 It is calculated based on the ``bounce`` parameter, and it's approximately equal to the time it takes the spring to "settle" at the final point.
+
+### Credits
+This package is inspired by [sprung](https://pub.dev/packages/sprung) package and [SwiftUI's Spring API](https://developer.apple.com/documentation/swiftui/spring).
