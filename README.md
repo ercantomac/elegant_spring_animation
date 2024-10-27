@@ -39,6 +39,20 @@ void initState() {
   animationController = AnimationController(vsync: this, duration: curve.recommendedDuration);
 }
 ```
+```dart
+ScaleTransition(
+    scale: CurvedAnimation(parent: animationController, curve: curve, reverseCurve: curve.flipped),
+    child: ...,
+)
+```
+```dart
+AnimatedScale(
+    scale: condition ? 0.5 : 1.0,
+    duration: curve.recommendedDuration,
+    curve: curve,
+    child: ...,
+)
+```
 
 ### Customizing the bounciness
 
