@@ -15,7 +15,13 @@ Make your animations feel natural with spring animations.
 
 This package lets you easily create animation curves that are based on spring physics, and use them wherever you want.
 
-[(WASM) See live demo here.](https://wasm-elegant-spring-animation.netlify.app/)
+Live demo:
+- [WASM](https://wasm-app-launch-animation-concept.netlify.app/)
+- [JavaScript](https://app-launch-animation-concept.netlify.app/)
+
+Live demo 2:
+- [WASM](https://wasm-elegant-spring-animation.netlify.app/)
+- [JavaScript]
 
 ## Getting started
 
