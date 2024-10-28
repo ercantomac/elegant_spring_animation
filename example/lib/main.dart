@@ -43,6 +43,8 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
   late double _kBounce = 0.0;
   late int _kDuration = _elegantCurve.recommendedDuration.inMilliseconds;
   late final AnimationController _animationController = AnimationController(vsync: this, duration: Duration(milliseconds: _kDuration));
+  late CurvedAnimation _animation =
+      CurvedAnimation(parent: _animationController, curve: _elegantCurve, reverseCurve: _elegantCurve.flipped);
   late ElegantSpring _elegantCurve = ElegantSpring(bounce: _kBounce);
 
   @override
@@ -55,10 +57,15 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
   Widget build(BuildContext context) {
     final double maxWidth = max(MediaQuery.sizeOf(context).height / 2, MediaQuery.sizeOf(context).width / 2);
 
+    _animation = CurvedAnimation(parent: _animationController, curve: _elegantCurve, reverseCurve: _elegantCurve.flipped);
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Text('Elegant Spring Animation Demo'),
+        title: const Text(
+          'Elegant Spring Animation Demo',
+          style: TextStyle(color: Colors.white),
+        ),
         centerTitle: true,
       ),
       body: FractionallySizedBox(
@@ -84,7 +91,7 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
                         style: Theme.of(context).textTheme.headlineSmall,
                       ),
                       Slider(
-                        divisions: 98,
+                        divisions: 198,
                         min: 100.0,
                         max: 10000.0,
                         value: _kDuration.toDouble(),
@@ -106,7 +113,8 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
                         onChanged: (double val) {
                           setState(() {
                             _kBounce = double.parse(val.toStringAsFixed(2));
-                            _kDuration = ElegantSpring(bounce: _kBounce).recommendedDuration.inMilliseconds;
+                            _elegantCurve = ElegantSpring(bounce: _kBounce);
+                            _kDuration = _elegantCurve.recommendedDuration.inMilliseconds;
                           });
                         },
                       ),
@@ -125,15 +133,14 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
                     widthFactor: 0.5,
                     heightFactor: 0.5,
                     child: ScaleTransition(
-                      scale: CurvedAnimation(parent: _animationController, curve: _elegantCurve, reverseCurve: _elegantCurve.flipped)
-                          .drive(Tween<double>(begin: 1.0, end: 0.2)),
+                      scale: _animation.drive(Tween<double>(begin: 1.0, end: 0.2)),
                       child: RotationTransition(
-                        turns: CurvedAnimation(parent: _animationController, curve: _elegantCurve, reverseCurve: _elegantCurve.flipped)
-                            .drive(Tween<double>(begin: 0.0, end: 0.5)),
-                        child: Material(
-                          elevation: 16.0,
-                          borderRadius: BorderRadius.circular(20.0),
-                          color: Theme.of(context).colorScheme.primary,
+                        turns: _animation.drive(Tween<double>(begin: 0.0, end: 0.5)),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20.0),
+                            color: Theme.of(context).colorScheme.primary,
+                          ),
                         ),
                       ),
                     ),
@@ -150,7 +157,6 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
             : () async {
                 setState(() {
                   _animationController.duration = Duration(milliseconds: _kDuration);
-                  _elegantCurve = ElegantSpring(bounce: _kBounce);
                   _isAnimating = true;
                 });
 
@@ -164,8 +170,8 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
                   _isAnimating = false;
                 });
               },
-        backgroundColor: _isAnimating ? Theme.of(context).colorScheme.secondaryContainer : null,
-        foregroundColor: _isAnimating ? Colors.white38 : null,
+        backgroundColor: _isAnimating ? Theme.of(context).colorScheme.secondaryContainer : Theme.of(context).colorScheme.inversePrimary,
+        foregroundColor: _isAnimating ? Colors.white38 : Colors.white,
         label: const Text('Run'),
         icon: const Icon(Icons.play_circle_outline_rounded),
       ),

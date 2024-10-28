@@ -21,7 +21,7 @@ Live demo:
 
 Live demo 2:
 - [WASM](https://wasm-elegant-spring-animation.netlify.app/)
-- [JavaScript]
+- [JavaScript](https://elegant-spring-animation.netlify.app/)
 
 ## Getting started
 
