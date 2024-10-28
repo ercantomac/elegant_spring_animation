@@ -11,24 +11,25 @@ and the Flutter guide for
 [developing packages and plugins](https://flutter.dev/developing-packages).
 -->
 
+Elegant Spring Animation
+================================================================================
+
 Make your animations feel natural with spring animations.
 
-This package lets you easily create animation curves that are based on spring physics, and use them wherever you want.
+This package lets you easily create animation curves that are based on spring physics, with customizable bounciness!
 
 Live demo:
-- [WASM](https://wasm-app-launch-animation-concept.netlify.app/)
-- [JavaScript](https://app-launch-animation-concept.netlify.app/)
+- [WASM](https://wasm-app-launch-animation-concept.netlify.app/) | [JavaScript](https://app-launch-animation-concept.netlify.app/)
 
 Live demo 2:
-- [WASM](https://wasm-elegant-spring-animation.netlify.app/)
-- [JavaScript](https://elegant-spring-animation.netlify.app/)
+- [WASM](https://wasm-elegant-spring-animation.netlify.app/) | [JavaScript](https://elegant-spring-animation.netlify.app/)
 
 ## Getting started
 
 Add `elegant_spring_animation` as a dependency in your pubspec.yaml file:
 ```yaml
 dependencies:
-  elegant_spring_animation: ^2.0.1
+  elegant_spring_animation: ^2.0.2
 ```
 
 ## Usage

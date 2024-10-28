@@ -1,3 +1,5 @@
+## 2.0.2
+- Updated the readme
 ## 2.0.1
 - Updated image URLs in the readme
 ## 2.0.0
