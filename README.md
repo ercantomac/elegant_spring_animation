@@ -28,7 +28,7 @@ Live demo 2:
 Add `elegant_spring_animation` as a dependency in your pubspec.yaml file:
 ```yaml
 dependencies:
-  elegant_spring_animation: ^2.0.0
+  elegant_spring_animation: ^2.0.1
 ```
 
 ## Usage
